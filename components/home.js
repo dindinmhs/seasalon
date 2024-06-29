@@ -21,7 +21,7 @@ export function Home() {
                         width={350}
                         height={350}
                         priority={true}
-                        className="rounded-3xl absolute top-0 left-0"
+                        className="rounded-3xl absolute top-0 left-0 w-auto h-auto"
                         />
                     <Image
                         src="/home/hero2.jpg"
@@ -29,7 +29,7 @@ export function Home() {
                         width={350}
                         height={350}
                         priority={true}
-                        className="rounded-3xl absolute right-0 bottom-0"
+                        className="rounded-3xl absolute right-0 bottom-0 w-auto h-auto"
                         />
                 </div>
             </div>
