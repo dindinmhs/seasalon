@@ -1,8 +1,9 @@
-import { About } from "@/components/about";
-import { Contact } from "@/components/contact";
-import { Footer } from "@/components/footer";
-import { Home } from "@/components/home";
-import { Service } from "@/components/services";
+import { About } from "@/components/homepage/about";
+import { Contact } from "@/components/homepage/contact";
+import { Footer } from "@/components/homepage/footer";
+import { Home } from "@/components/homepage/home";
+import { Review } from "@/components/homepage/reviews";
+import { Service } from "@/components/homepage/services";
 import Image from "next/image";
 
 export default function Homepage() {
@@ -12,6 +13,7 @@ export default function Homepage() {
       <About/>
       <Service/>
       <Contact/>
+      <Review/>
       <Footer/>
     </main>
   );
