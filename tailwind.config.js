@@ -9,9 +9,9 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // screens : {
-      //   'rotate': { 'raw': '(min-height: 800px)' },
-      // },
+      screens : {
+        'lc' : {'raw' : '(min-height : 500px)'}, 
+      },
     },
   },
   plugins: [nextui()],
