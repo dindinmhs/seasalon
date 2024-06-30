@@ -1,6 +1,6 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import { Nav } from "@/components/homepage/nav";
+import {NextUIProvider} from "@nextui-org/react"
 
 const poppins = Poppins({ subsets: ["latin"], weight: ['400'] });
 
@@ -13,8 +13,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
       <body className={poppins.className}>
-          <Nav/>
+        <NextUIProvider>
           {children}
+        </NextUIProvider>
       </body>
     </html>
   );
