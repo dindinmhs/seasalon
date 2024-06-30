@@ -34,7 +34,7 @@ export function Form({fetchReviews}) {
             if (!res.ok) {
                 throw new Error(`HTTP error! status: ${res.status}`);
             }
-            fetchReviews()
+            // fetchReviews()
             isLoading(false)
             setMessage("Thank you for your review")
             e.target.reset()

@@ -17,9 +17,10 @@ export function Review() {
             console.error(error)
         }
     }
-    // useEffect(()=>{
-    //     fetchReviews()
-    // },[])
+    useEffect(()=>{
+        fetchReviews()
+        console.log(reviews)
+    },[reviews])
     return (
         <section id="reviews" className="py-6 px-4">
             <h2 className="font-black text-4xl text-center">Reviews</h2>
