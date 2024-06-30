@@ -1,10 +1,15 @@
 "use client"
 import { Select, SelectItem } from "@nextui-org/react";
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 export function Form({loading,isLoading}) {
     const animals = ['Haircuts and styling','manicure and pedicure','facial treatments']
     const [today, setToday] = useState("");
     const [book,setBook] = useState()
+    const session = useSession()
+    useEffect(()=>{
+        console.log(session)
+    },[session])
 
     useEffect(() => {
         const now = new Date();

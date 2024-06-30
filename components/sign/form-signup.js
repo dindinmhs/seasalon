@@ -13,7 +13,7 @@ export function Form() {
     function handleChange(event) {
         const name = event.target.name
         const value = event.target.value
-        setData(values => ({...values, [name] : value, user : 'Customer'}))
+        setData(values => ({...values, [name] : value, role : 'Customer'}))
     }
     async function handleSubmit(e) {
         e.preventDefault()
@@ -63,7 +63,7 @@ export function Form() {
             <p className="text-sm mb-4 font-bold">{info}</p>
             <Submit isPending={isPending} name="Sign Up"/>
             <div className={`${isPending?'block':'hidden'} loader animate-spin bg-slate-900 w-12 m-auto`}></div>
-            <p className="text-sm mt-6 text-center">already have an account? <Link className="text-blue-700 font-black" href="sign-up">Sign In</Link>
+            <p className="text-sm mt-6 text-center">already have an account? <Link className="text-blue-700 font-black" href="sign-in">Sign In</Link>
             </p>
         </form>
     )
