@@ -10,7 +10,7 @@ export async function POST(req) {
         if (exist) {
             return NextResponse.json({exist : true }, {status : 200})
         } else {
-            return NextResponse.json({exist : false}, {status : 409})
+            return NextResponse.json({exist : false}, {status : 200})
         }
     } catch (error) {
         console.log('failed fetching',error)
