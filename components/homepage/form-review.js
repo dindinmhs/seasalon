@@ -6,7 +6,6 @@ export function Form({fetchReviews}) {
     const [rating, setRating] = useState(0)
     const [reviews, setReviews] = useState()
     const [loading, isLoading] = useState(false)
-    const [message, setMessage] = useState()
     const handleClick = (value) => {
         setRating(value)
       }
@@ -20,8 +19,7 @@ export function Form({fetchReviews}) {
     },[rating])
 
     // insert review
-    async function handleSubmit(e) {
-        e.preventDefault()
+    async function handleSubmit() {
         try {
             isLoading(true)
             const res = await fetch('/api/insert-review', {
@@ -36,8 +34,6 @@ export function Form({fetchReviews}) {
             }
             // fetchReviews()
             isLoading(false)
-            setMessage("Thank you for your review")
-            e.target.reset()
         } catch (error) {
             console.error('Form submission error:', error)
         }
@@ -70,7 +66,6 @@ export function Form({fetchReviews}) {
       })}
             </div>
             <textarea disabled={loading} required onChange={handleChange} name="comment" rows="5" placeholder="Comment" className="w-full bg-slate-200 text-slate-900 placeholder:text-slate-900 placeholder:font-bold px-4 py-2 outline-none mt-2 resize-none font-bold"></textarea>
-            <p className="font-bold text-slate-200">{message}</p>
             <div className="w-full flex justify-end">
                 <button disabled={loading} type="submit" className={`${loading?'hidden':'inline'} px-2 py-1 bg-red-400 text-slate-900 font-black mt-4 hover:bg-red-500`}>Submit</button>
                 <div className={`${loading?'block':'hidden'} loader animate-spin bg-red-400 w-12`}></div>
