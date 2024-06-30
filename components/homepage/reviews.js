@@ -5,26 +5,24 @@ import { FaStar } from "react-icons/fa";
 
 export function Review() {
     const [reviews,setReviews] = useState()
-    async function fetchReviews() {
-        try{
-            const res = await fetch('/api/get-review',{
-                method : 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Cache-Control': 'no-cache', 
-                    'Pragma': 'no-cache', 
-                }
-            })
-            if (!res.ok) {
-                throw new Error(`HTTP error! status: ${res.status}`);
-            }
-            const data = await res.json()
-            setReviews(data)
-        } catch (error) {
-            console.error(error)
-        }
-    }
     useEffect(()=>{
+        async function fetchReviews() {
+            try{
+                const res = await fetch('/api/get-review',{
+                    method : 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                }
+                const data = await res.json()
+                setReviews(data)
+            } catch (error) {
+                console.error(error)
+            }
+        }
         fetchReviews()
     },[])
     return (
