@@ -16,7 +16,7 @@ export function Nav() {
             <Link className="mx-10 my-2 md:my-0 md:mx-2 block md:inline" href="/#services">Services</Link>
             <Link className="mx-10 my-2 md:my-0 md:mx-2 block md:inline" href="/#contact">Contact</Link>
             <Link className="mx-10 my-2 md:my-0 md:mx-2 block md:inline" href="/#reviews">Reviews</Link>
-            <Link href="/dashboard/customer" className="block my-2 md:my-0 md:inline w-fit bg-red-400 hover:bg-red-500 md:ml-2 ml-10 px-4 py-1 font-bold rounded-full text-black self-end">Book Now</Link>
+            <Link href="/sign-in" className="block my-2 md:my-0 md:inline w-fit bg-red-400 hover:bg-red-500 md:ml-2 ml-10 px-4 py-1 font-bold rounded-full text-black self-end">Book Now</Link>
         </nav>
         <button onClick={()=>isOpen(!open)} className="block md:hidden">
             <div className={`${open?'rotate-45 translate-y-2':'rotate-0 translate-y-0'} w-6 h-1 bg-white rounded full my-1 origin-center duration-500`}></div>

@@ -32,7 +32,7 @@ export function Form({loading,isLoading}) {
             const res = await fetch('/api/insert-reservation', {
                 method : 'POST',
                 headers : {
-                    'Content-Type' : 'aplication/json'
+                    'Content-Type' : 'application/json'
                 },
                 body : JSON.stringify(book)
             })

@@ -23,7 +23,7 @@ export function Form() {
             const res =  await fetch('/api/user-exist', {
                     method : 'POST',
                     headers : {
-                        'Content-Type' : 'aplication/json'
+                        'Content-Type' : 'application/json'
                     },
                     body : JSON.stringify(data)
                 })
@@ -37,7 +37,7 @@ export function Form() {
                 const res = await fetch('/api/sign-up', {
                     method : 'POST',
                     headers : {
-                        'Content-Type' : 'aplication/json'
+                        'Content-Type' : 'application/json'
                     },
                     body : JSON.stringify(data)
                 })

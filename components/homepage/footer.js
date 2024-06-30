@@ -25,7 +25,7 @@ export function Footer() {
         },
         {
             title : 'Book Now',
-            href : "/dashboard/customer"
+            href : "/sign-in"
         },
     ]
     return (

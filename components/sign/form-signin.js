@@ -23,7 +23,7 @@ export function Form() {
             const res = await fetch('/api/sign-in', {
                 method : 'POST',
                 headers : {
-                    'Content-Type' : 'aplication/json'
+                    'Content-Type' : 'application/json'
                 },
                 body : JSON.stringify(data)
             })
@@ -35,21 +35,19 @@ export function Form() {
                     email : data.email,
                     password : data.password,
                 })
-                setPending(false)
                 if (res.ok) {
-                    setPending(false)
                     router.replace('/dashboard/customer')
                 } else {
-                    setPending(false)
                     setInfo('failed to sign in')
                 }
             } else {
-                setPending(false)
                 setInfo('Email or Password Incorrect')
                 e.target.reset()
             }
         } catch (error) {
             console.error('Sign up failed', error)
+        } finally {
+            setPending(false)
         }
     }
     return (

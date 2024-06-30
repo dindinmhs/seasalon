@@ -4,10 +4,7 @@ import { getToken } from "next-auth/jwt"
 
 export async function middleware(req) {
     const token = await getToken({ req });
-    console.log(!req.nextUrl.pathname.startsWith("/dashboard/customer"))
     if (!token) return NextResponse.redirect(new URL("/sign-in",req.url));
-    console.log(token)
-    console.log(req.nextUrl.pathname.startsWith("/dashboard/admin"))
     switch (token.user) {
         case "Customer":
             if (req.nextUrl.pathname.startsWith("/dashboard/admin")) {
