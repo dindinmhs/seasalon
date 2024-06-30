@@ -4,7 +4,6 @@ import { Footer } from "@/components/homepage/footer";
 import { Home } from "@/components/homepage/home";
 import { Review } from "@/components/homepage/reviews";
 import { Service } from "@/components/homepage/services";
-import Image from "next/image";
 
 export default function Homepage() {
   return (

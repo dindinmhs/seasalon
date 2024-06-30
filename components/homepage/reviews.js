@@ -5,30 +5,25 @@ import { FaStar } from "react-icons/fa";
 
 export function Review() {
     const [reviews,setReviews] = useState()
-    useEffect(()=>{
-        async function fetchReviews() {
-            try{
-                const res = await fetch('/api/get-review',{
-                    method : 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                })
-                if (!res.ok) {
-                    throw new Error(`HTTP error! status: ${res.status}`);
-                }
-                const data = await res.json()
-                setReviews(data)
-            } catch (error) {
-                console.error(error)
+    async function fetchReviews() {
+        try{
+            const res = await fetch('/api/get-review')
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
             }
+            const data = await res.json()
+            setReviews(data)
+        } catch (error) {
+            console.error(error)
         }
+    }
+    useEffect(()=>{
         fetchReviews()
     },[])
     return (
         <section id="reviews" className="py-6 px-4">
             <h2 className="font-black text-4xl text-center">Reviews</h2>
-            <Form/>
+            <Form fetchReviews={fetchReviews}/>
             <div className="bg-slate-200">
                 <h3 className="font-black text-xl text-center my-4">What Our Customers Say</h3>
                 <div className="flex flex-wrap gap-10 justify-center">
