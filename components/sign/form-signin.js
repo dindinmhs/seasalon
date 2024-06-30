@@ -18,7 +18,7 @@ export function Form() {
             <input required disabled={isPending} className="border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block my-4 font-bold w-full" name="email" onChange={handleChange} placeholder="Email" type="email"/>
             <input required disabled={isPending} className="border-2 py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block my-4 text-lg font-bold w-full" name="password" onChange={handleChange} placeholder="Password" type="password"/>
             <Submit name="Sign In"/>
-            <p className="text-sm mt-6 text-center">don't have an account? <Link className="text-blue-700 font-black" href="sign-up">Sign Up</Link>
+            <p className="text-sm mt-6 text-center">don&apos;t have an account? <Link className="text-blue-700 font-black" href="sign-up">Sign Up</Link>
             </p>
         </form>
     )
