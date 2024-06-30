@@ -9,7 +9,7 @@ export async function POST(req) {
     try {
         const db = await connectDB()
         const coll = db.collection('user')
-        coll.insertOne({...newData})
+        await coll.insertOne({...newData})
         return NextResponse.json({massage : 'account created'}, {status : 201})
     } catch (error) {
         console.log('failed fetching',error)
