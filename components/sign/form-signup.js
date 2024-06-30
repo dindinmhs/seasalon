@@ -55,15 +55,15 @@ export function Form() {
     return (
         <form onSubmit={handleSubmit}>
             <RiScissors2Fill size={50} className="m-auto"/>
-            <h2 className='text-3xl my-10 text-center font-bold'>Sign Up</h2>
-            <input required disabled={isPending} className='border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block my-4 font-bold w-full' name="name" onChange={handleChange} placeholder="Name" type="text"/>
-            <input required disabled={isPending} className='border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block my-4 font-bold w-full' name="email" onChange={handleChange} placeholder="Email" type="email"/>
-            <input required disabled={isPending} className='border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block my-4 font-bold w-full' maxLength="12" pattern="^0[0-9]{9,14}$" name="tel" onChange={handleChange} placeholder="Phone Number" type="tel"/>
-            <input required disabled={isPending} className='border-2 py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block my-4 text-lg font-bold w-full' name="password" onChange={handleChange} placeholder="Password" type="password"/>
-            <p className='text-sm mb-4 font-bold'>{info}</p>
+            <h2 className="text-3xl my-10 text-center font-bold">Sign Up</h2>
+            <input required disabled={isPending} className="border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block my-4 font-bold w-full" name="name" onChange={handleChange} placeholder="Name" type="text"/>
+            <input required disabled={isPending} className="border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block my-4 font-bold w-full" name="email" onChange={handleChange} placeholder="Email" type="email"/>
+            <input required disabled={isPending} className="border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block my-4 font-bold w-full" maxLength="12" pattern="^0[0-9]{9,14}$" name="tel" onChange={handleChange} placeholder="Phone Number" type="tel"/>
+            <input required disabled={isPending} className="border-2 py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block my-4 text-lg font-bold w-full" name="password" onChange={handleChange} placeholder="Password" type="password"/>
+            <p className="text-sm mb-4 font-bold">{info}</p>
             <Submit isPending={isPending} name="Sign Up"/>
             <div className={`${isPending?'block':'hidden'} loader animate-spin bg-slate-900 w-12 m-auto`}></div>
-            <p className='text-sm mt-6 text-center'>already have an account? <Link className='text-blue-700 font-black' href="sign-up">Sign In</Link>
+            <p className="text-sm mt-6 text-center">already have an account? <Link className="text-blue-700 font-black" href="sign-up">Sign In</Link>
             </p>
         </form>
     )
