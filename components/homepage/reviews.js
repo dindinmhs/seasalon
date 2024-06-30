@@ -7,7 +7,17 @@ export function Review() {
     const [reviews,setReviews] = useState()
     async function fetchReviews() {
         try{
-            const res = await fetch('/api/get-review')
+            const res = await fetch('/api/get-review',{
+                method : 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Cache-Control': 'no-cache', 
+                    'Pragma': 'no-cache', 
+                }
+            })
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
             const data = await res.json()
             setReviews(data)
         } catch (error) {
@@ -16,8 +26,7 @@ export function Review() {
     }
     useEffect(()=>{
         fetchReviews()
-        console.log('tes')
-    })
+    },[])
     return (
         <section id="reviews" className="py-6 px-4">
             <h2 className="font-black text-4xl text-center">Reviews</h2>
