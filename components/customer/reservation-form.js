@@ -23,7 +23,7 @@ export function Form({data, services}) {
         setBook(values => ({...values, [name] : value, email_id : data.user.email}))
     }
     useEffect(()=>{
-        let list = services.filter(list=>list.service.includes(book?.type))
+        let list = services?.filter(list=>list.service.includes(book?.type))
         setBook(values => ({...values, duration : list[0]?.duration}))
     }, [book?.type])
     async function handleSubmit(e) {
