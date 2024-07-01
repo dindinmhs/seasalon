@@ -5,17 +5,17 @@ import { Loading } from "@/components/loading/loading"
 import { useState, useEffect } from "react"
 export default function Booking() {
     const {data, status} = useSession()
-    const [services,setServices] = useState()
+    const [branchs,setBranch] = useState()
     const [isPending, setPending] = useState(false)
-    async function fetchServices() {
+    async function fetchBranchs() {
         setPending(true)
         try{
-            const res = await fetch('/api/get-services')
+            const res = await fetch('/api/get-branch')
             if (!res.ok) {
                 throw new Error(`HTTP error! status: ${res.status}`);
             }
             const data = await res.json()
-            setServices(data)
+            setBranch(data)
         } catch (error) {
             console.error(error)
         } finally {
@@ -23,7 +23,7 @@ export default function Booking() {
         }
     }
     useEffect(()=>{
-        fetchServices()
+        fetchBranchs()
     },[])
     if (status === 'loading' || isPending) {
         return (
@@ -31,7 +31,7 @@ export default function Booking() {
         )
     } else if (status === 'authenticated' || !isPending) {
         return (
-            <Form data={data} services={services}/>
+            <Form data={data} branchs={branchs}/>
         )
     }
 }

@@ -2,6 +2,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import {NextUIProvider} from "@nextui-org/react"
 import { Providers } from "@/provider";
+import Head from "next/head";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ['400'] });
 
@@ -13,6 +14,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
+      <Head>
+        <link rel="icon" href="/head/favicon.ico"/>
+      </Head>
       <body className={poppins.className}>
         <Providers>
           <NextUIProvider>

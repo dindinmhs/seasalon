@@ -1,7 +1,9 @@
 "use client"
 import { useState } from "react";
 import { Submit } from "../sign/button";
-export function Form() {
+import { Select, SelectItem } from "@nextui-org/react";
+export function Form({branchs}) {
+    console.log(branchs)
     const [service,setService] = useState()
     const [info, setInfo] = useState('')
     const [isPending, setPending] = useState(false)
@@ -35,7 +37,24 @@ export function Form() {
     }
     return (     
         <form onSubmit={handleSubmit} className="md:w-[20rem] w-full font-bold mb-[6rem] md:mb-0 mx-auto md:m-0">
-            <h2 className="text-2xl mb-6">Add New Services</h2>
+            <h2 className="text-2xl mb-14">Add New Services</h2>
+            <Select 
+            placeholder="Select Branch"
+            isRequired
+            label="Branch"
+            className="w-full block"
+            aria-label="Type of Service"
+            radius="full"
+            labelPlacement="outside"
+            name="branch" 
+            onChange={handleChange}
+            >
+            {branchs?.map((list) => (
+                <SelectItem key={list.branch} value={list.branch}>
+                {list.branch}
+                </SelectItem>
+            ))}
+            </Select>
             <input required onChange={handleChange} name="service" type="text" placeholder="Type Of Service" className="border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block my-4 font-bold w-full"/>
             <div className="px-4 border-solid border-black rounded-full py-1 border-2 text-lg font-bold w-full bg-white flex justify-between">
                 <input id="duration" required onChange={handleChange} name="duration" type="number" min="1" max="24" placeholder="Duration" className="placeholder-slate-900 outline-none inline-block grow"/>

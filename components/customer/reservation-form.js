@@ -2,10 +2,11 @@
 import { Select, SelectItem } from "@nextui-org/react";
 import { useState, useEffect } from "react";
 import { Submit } from "../sign/button";
-export function Form({data, services}) {
+export function Form({data, branchs}) {
     const [today, setToday] = useState("");
     const [book,setBook] = useState()
     const [info, setInfo] = useState('')
+    const [services,setServices] = useState()
     const [isPending, setPending] = useState(false)
     useEffect(() => {
         const now = new Date();
@@ -23,7 +24,7 @@ export function Form({data, services}) {
         setBook(values => ({...values, [name] : value, email_id : data.user.email}))
     }
     useEffect(()=>{
-        let list = services?.filter(list=>list.service.includes(book?.type))
+        let list = !services?"":services.filter(list=>list.service.includes(book?.type))
         setBook(values => ({...values, duration : list[0]?.duration}))
     }, [book?.type])
     async function handleSubmit(e) {
@@ -49,6 +50,28 @@ export function Form({data, services}) {
             setBook({})
         }
     }
+    async function fetchServices(event) {
+        try {
+            const res = await fetch('/api/get-services', {
+                method : 'POST',
+                headers : {
+                    'Content-Type' : 'application/json'
+                },
+                body : JSON.stringify({branch:event.target.value})
+            })
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+            const data = await res.json()
+            setServices(data)
+            setBook(values => ({...values, branch:event.target.value}))
+        } catch (error) {
+            console.error('Form submission error:', error)
+        }
+    }
+    useEffect(()=>{
+        console.log(book)
+    },[book])
     return (     
         <form onSubmit={handleSubmit} className="md:w-[20rem] w-full font-bold mb-[6rem] md:mb-0 mx-auto md:m-0">
             <h2 className="text-2xl mb-6">Reservation Form</h2>
@@ -58,7 +81,24 @@ export function Form({data, services}) {
                 <small className="ml-4 block">example : 085771722157</small>
             </div>
             <Select 
-            placeholder="Select Type of Service"
+            placeholder="Select Branch"
+            isRequired
+            label="Branch"
+            className="w-full block mb-10"
+            aria-label="Branch"
+            radius="full"
+            labelPlacement="outside"
+            name="type" 
+            onChange={fetchServices}
+            >
+            {branchs?.map((list) => (
+                <SelectItem key={list.branch} value={list.branch}>
+                {list.branch}
+                </SelectItem>
+            ))}
+            </Select>
+            <Select 
+            placeholder={!services?"Select Branch First":"Type of Service"}
             isRequired
             label="Type of Service"
             className="w-full block"
@@ -68,7 +108,7 @@ export function Form({data, services}) {
             name="type" 
             onChange={handleChange}
             >
-            {services?.map((list) => (
+            {!services?"":services.map((list) => (
                 <SelectItem key={list.service} value={list.service}>
                 {list.service}
                 </SelectItem>
