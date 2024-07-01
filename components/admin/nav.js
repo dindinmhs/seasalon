@@ -46,7 +46,7 @@ export function Nav({session}) {
                         height={50}
                         alt="profile"
                         priority={true}
-                        className={`${path === '/dashboard/customer/profile'?'border-slate-900':'border-red-200'} rounded-full border-4 border-solid group-hover:border-slate-900`}
+                        className={`${path === '/dashboard/admin/profile'?'border-slate-900':'border-red-200'} rounded-full border-4 border-solid group-hover:border-slate-900`}
                     />
                     <div className="text-lg group-hover:text-slate-900 hidden md:block w-[11rem] ml-4 truncate">{session?.data?.user?.name}</div>
                 </div>
