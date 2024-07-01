@@ -1,20 +1,16 @@
 "use client"
 import { Select, SelectItem } from "@nextui-org/react";
 import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
-export function Form({loading,isLoading}) {
-    const animals = ['Haircuts and styling','manicure and pedicure','facial treatments']
+import { Submit } from "../sign/button";
+export function Form({data, services}) {
     const [today, setToday] = useState("");
     const [book,setBook] = useState()
-    const session = useSession()
-    useEffect(()=>{
-        console.log(session)
-    },[session])
-
+    const [info, setInfo] = useState('')
+    const [isPending, setPending] = useState(false)
     useEffect(() => {
         const now = new Date();
         const yyyy = now.getFullYear();
-        const mm = String(now.getMonth() + 1).padStart(2, "0"); // Januari adalah 0!
+        const mm = String(now.getMonth() + 1).padStart(2, "0");
         const dd = String(now.getDate()).padStart(2, "0");
 
         const formattedToday = `${yyyy}-${mm}-${dd}`;
@@ -24,11 +20,16 @@ export function Form({loading,isLoading}) {
     function handleChange(event) {
         const name = event?.target.name
         const value = event?.target.value
-        setBook(values => ({...values, [name] : value, duration : "1 hour"}))
+        setBook(values => ({...values, [name] : value, email_id : data.user.email}))
     }
+    useEffect(()=>{
+        let list = services.filter(list=>list.service.includes(book?.type))
+        setBook(values => ({...values, duration : list[0]?.duration}))
+    }, [book?.type])
     async function handleSubmit(e) {
+        e.preventDefault()
+        setPending(true)
         try {
-            isLoading(true)
             const res = await fetch('/api/insert-reservation', {
                 method : 'POST',
                 headers : {
@@ -39,39 +40,54 @@ export function Form({loading,isLoading}) {
             if (!res.ok) {
                 throw new Error(`HTTP error! status: ${res.status}`);
             }
-            // const data = await res.json();
-            isLoading(false)
+            setInfo("Booking Confirmed!")
         } catch (error) {
             console.error('Form submission error:', error)
+        } finally {
+            setPending(false)
+            e.target.reset()
+            setBook({})
         }
     }
     return (     
-        <form onSubmit={handleSubmit}>
-            <h2>Reservation Form</h2>
-            <input required onChange={handleChange} name="name" type="text" placeholder="Name" className="block my-2"/>
-            <input required onChange={handleChange} name="telp" type="tel" maxLength="12" placeholder="Phone Number" className="my-2"/>
+        <form onSubmit={handleSubmit} className="md:w-[20rem] w-full font-bold mb-[6rem] md:mb-0 mx-auto md:m-0">
+            <h2 className="text-2xl mb-6">Reservation Form</h2>
+            <input required onChange={handleChange} name="name" type="text" placeholder="Name" className="border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block my-4 font-bold w-full"/>
+            <input required onChange={handleChange} name="telp" type="tel" maxLength="12" placeholder="Phone Number" className="border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block font-bold w-full"/>
+            <div className="mb-10 mt-1">
+                <small className="ml-4 block">example : 085771722157</small>
+            </div>
             <Select 
             placeholder="Select Type of Service"
             isRequired
             label="Type of Service"
-            className="w-fit my-2 block"
+            className="w-full block"
             aria-label="Type of Service"
+            radius="full"
+            labelPlacement="outside"
             name="type" 
             onChange={handleChange}
             >
-            {animals.map((animal) => (
-                <SelectItem key={animal} value={animal}>
-                {animal}
+            {services?.map((list) => (
+                <SelectItem key={list.service} value={list.service}>
+                {list.service}
                 </SelectItem>
             ))}
             </Select>
             <label htmlFor="date" className="mt-2 block">Reservation Date</label>
-            <input required onChange={handleChange} name="date" id="date" type="date" min={today} aria-label="Reservation Date" className="block"/>
+            <input required onChange={handleChange} name="date" id="date" type="date" min={today} aria-label="Reservation Date" className="border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block  mt-1 font-bold w-full"/>
             <label htmlFor="time" className="mt-2 block">Reservation Time</label>
-            <input required onChange={handleChange} name="time" id="time" type="time" placeholder="Time" min="09:00" max="21:00" aria-label="Reservation Time" className="block"/>
+            <input required onChange={handleChange} name="time" id="time" type="time" min="09:00" max="20:00" aria-label="Reservation Time" className="border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block  mt-1 font-bold w-full"/>
+            <div className="mt-1">
+                <small className="ml-4 block">from 09:00 - 20:00</small>
+            </div>
             <label htmlFor="time" className="mt-2 block">Duration</label>
-            <input required name="duration" disabled id="time" type="text" placeholder="Duration" aria-label="Reservation Time" className="block" defaultValue="1 hour"/>
-            <button type="submit">Submit</button>
+            <div className="px-4 border-solid border-black rounded-full py-1 border-2 text-lg font-bold w-full bg-gray-100 flex justify-between">
+                <p>{book?.duration?`${book.duration} hour`:"-"}</p>
+            </div>
+            <p className="text-sm mb-4 font-bold">{info}</p>
+            <Submit name="Book Now" isPending={isPending}/>
+            <div className={`${isPending?'block':'hidden'} loader animate-spin bg-slate-900 w-12 m-auto`}></div>
         </form>
     )
 }

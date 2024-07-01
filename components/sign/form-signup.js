@@ -30,7 +30,6 @@ export function Form() {
             const user = await res.json()
             // jika user exist
             if (user.exist) {
-                setPending(false)
                 setInfo('Email already in use')
                 return
             } else {
@@ -41,7 +40,6 @@ export function Form() {
                     },
                     body : JSON.stringify(data)
                 })
-                setPending(false)
                 if (res.ok) {
                     router.push('/sign-in')
                 } else {
@@ -50,6 +48,8 @@ export function Form() {
             }
         } catch (error) {
             console.error('Sign up failed', error)
+        } finally {
+            setPending(false)
         }
     }
     return (

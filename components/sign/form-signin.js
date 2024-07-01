@@ -36,7 +36,7 @@ export function Form() {
                     password : data.password,
                 })
                 if (res.ok) {
-                    router.replace('/dashboard/customer')
+                    router.replace('/dashboard/customer/booking')
                 } else {
                     setInfo('failed to sign in')
                 }

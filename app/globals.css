@@ -2,14 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-slate-200
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+html, body {
+  @apply h-full overflow-auto;
+}
+
+body {
+  @apply bg-slate-200
 }
 
 .loader {
@@ -22,3 +26,6 @@ body {
   -webkit-mask-composite: destination-in;
           mask-composite: intersect;
 }
+
+
+
