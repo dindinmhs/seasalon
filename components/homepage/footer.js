@@ -54,8 +54,7 @@ export function Footer() {
                 </div>
             </div>
             <div className="bg-slate-900 text-center text-white text-[0.85rem] py-4">
-                <p>Copyright © 2024 <b>Dindin Imanudin</b></p>
-                <p>Made with ❤️ using <b>Next.js</b></p>
+                <p>©2024 <b>SEA Salon</b>, All right reserved</p>
             </div>
         </footer>
     )

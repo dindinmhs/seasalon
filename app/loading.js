@@ -1,5 +1,3 @@
-import { Loading } from "@/components/loading/loading";
-
 export default function Load() {
     return (
         <div className="w-screen h-screen flex justify-center items-center">

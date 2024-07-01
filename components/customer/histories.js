@@ -41,7 +41,7 @@ export function DashboardHistories({data}) {
                 <div className="flex flex-wrap font-bold gap-6 mb-[6rem] md:mb-0">
                 {histories?.length === 0?(<NoHistory/>):
                     histories?.map(list=>(
-                        <div className="w-[30rem] bg-slate-900 text-red-200 p-6">
+                        <div key={list._id} className="w-[30rem] bg-slate-900 text-red-200 p-6">
                             <h3 className="text-lg mb-2">{list.name}</h3>
                             <div className="flex items-center gap-4 my-1">
                                 <MdDateRange size={30} className=""/>

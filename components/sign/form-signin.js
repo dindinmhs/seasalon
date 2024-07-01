@@ -52,7 +52,9 @@ export function Form() {
     }
     return (
         <form onSubmit={handleSubmit}>
-            <RiScissors2Fill size={50} className="m-auto"/>
+            <Link href="/">
+                <RiScissors2Fill size={50} className="m-auto"/>
+            </Link>
             <h2 className="text-3xl my-10 text-center font-bold">Sign In</h2>
             <input required disabled={isPending} className="border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block my-4 font-bold w-full" name="email" onChange={handleChange} placeholder="Email" type="email"/>
             <input required disabled={isPending} className="border-2 py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block my-4 text-lg font-bold w-full" name="password" onChange={handleChange} placeholder="Password" type="password"/>

@@ -54,11 +54,16 @@ export function Form() {
     }
     return (
         <form onSubmit={handleSubmit}>
-            <RiScissors2Fill size={50} className="m-auto"/>
+            <Link href="/">
+                <RiScissors2Fill size={50} className="m-auto"/>
+            </Link>
             <h2 className="text-3xl my-10 text-center font-bold">Sign Up</h2>
             <input required disabled={isPending} className="border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block my-4 font-bold w-full" name="name" onChange={handleChange} placeholder="Name" type="text"/>
             <input required disabled={isPending} className="border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block my-4 font-bold w-full" name="email" onChange={handleChange} placeholder="Email" type="email"/>
-            <input required disabled={isPending} className="border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block my-4 font-bold w-full" maxLength="12" pattern="^0[0-9]{9,14}$" name="tel" onChange={handleChange} placeholder="Phone Number" type="tel"/>
+            <input required disabled={isPending} className="border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block mt-4 font-bold w-full" maxLength="12" pattern="^0[0-9]{9,14}$" name="tel" onChange={handleChange} placeholder="Phone Number" type="tel"/>
+            <div className="font-bold mt-1">
+                <small className="ml-4 block">example : 085771722157</small>
+            </div>
             <input required disabled={isPending} className="border-2 py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block my-4 text-lg font-bold w-full" name="password" onChange={handleChange} placeholder="Password" type="password"/>
             <p className="text-sm mb-4 font-bold">{info}</p>
             <Submit isPending={isPending} name="Sign Up"/>
