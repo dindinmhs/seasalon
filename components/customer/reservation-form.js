@@ -2,6 +2,10 @@
 import { Select, SelectItem } from "@nextui-org/react";
 import { useState, useEffect } from "react";
 import { Submit } from "../sign/button";
+import { HiOfficeBuilding } from "react-icons/hi"
+import { FaLocationDot } from "react-icons/fa6";
+import { MdOutlineWorkHistory } from "react-icons/md"
+import { IoMdTime } from "react-icons/io"
 export function Form({data, branchs}) {
     const [today, setToday] = useState("");
     const [book,setBook] = useState()
@@ -70,7 +74,7 @@ export function Form({data, branchs}) {
             }
             const data = await res.json()
             setServices(data)
-            setBook(values => ({...values, branch:event.target.value}))
+            setBook(values => ({...values, branch:event.target.value, duration : null}))
         } catch (error) {
             console.error('Form submission error:', error)
         } finally {
@@ -89,16 +93,23 @@ export function Form({data, branchs}) {
             placeholder="Select Branch"
             isRequired
             label="Branch"
-            className={`${loadService?'mb-4':'mb-10'} w-full block`}
+            className={`${loadService?'mb-4':'mb-10'} w-full block border-2 border-slate-900 rounded-full`}
             aria-label="Branch"
             radius="full"
             labelPlacement="outside"
-            name="type" 
+            name="type"
+            startContent={<HiOfficeBuilding/>} 
             onChange={fetchServices}
             >
             {branchs?.map((list) => (
-                <SelectItem key={list.branch} value={list.branch}>
-                {list.branch}
+                <SelectItem key={list.branch} textValue={list.branch}>
+                    <div className="flex flex-col gap-1">
+                        <span className="text-small">{list.branch}</span>
+                        <div className="flex gap-1">
+                            <FaLocationDot/>
+                            <span className="text-tiny text-default-400">{list.location}</span>
+                        </div>
+                    </div>
                 </SelectItem>
             ))}
             </Select>
@@ -109,16 +120,23 @@ export function Form({data, branchs}) {
                 placeholder={!services?"Please select a branch first.":services?.length === 0?"There are currently no services":"Type of Service"}
                 isRequired
                 label="Type of Service"
-                className="w-full block"
+                className="w-full block border-2 border-slate-900 rounded-full"
                 aria-label="Type of Service"
                 radius="full"
                 labelPlacement="outside"
-                name="type" 
+                name="type"
+                startContent={<MdOutlineWorkHistory/>} 
                 onChange={handleChange}
                 >
                 {!services?null:services.map((list) => (
-                    <SelectItem key={list.service} value={list.service}>
-                    {list.service}
+                    <SelectItem key={list.service} textValue={list.service}>
+                        <div className="flex flex-col gap-1">
+                            <span className="text-small">{list.service}</span>
+                            <div className="flex gap-1">
+                                <IoMdTime/>
+                                <span className="text-tiny text-default-400">{`${list.duration} hour`}</span>
+                            </div>
+                        </div>
                     </SelectItem>
                 ))}
                 </Select>

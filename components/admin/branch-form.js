@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react";
 import { Submit } from "../sign/button";
-export function Form() {
+export function Form({setOpen}) {
     const [branch,setBranch] = useState()
     const [info, setInfo] = useState('')
     const [isPending, setPending] = useState(false)
@@ -48,7 +48,7 @@ export function Form() {
             }
     }
     return (     
-        <form onSubmit={handleSubmit} className="md:w-[20rem] w-full font-bold mb-[6rem] md:mb-0 mx-auto md:m-0">
+        <form onSubmit={handleSubmit} className="md:w-[20rem] w-full font-bold mx-auto md:m-0 bg-slate-200 overflow-auto">
             <h2 className="text-2xl mb-6">Add New Branch</h2>
             <input required onChange={handleChange} name="branch" type="text" placeholder="Branch Name (Unique)" className="border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block my-4 font-bold w-full"/>
             <input required onChange={handleChange} name="location" type="text" placeholder="Branch Location" className="border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block my-4 font-bold w-full"/>
@@ -59,6 +59,7 @@ export function Form() {
             <p className="text-sm mb-4 mt-2 font-bold">{info}</p>
             <Submit name="Add Branch" isPending={isPending}/>
             <div className={`${isPending?'block':'hidden'} loader animate-spin bg-slate-900 w-12 m-auto`}></div>
+            <button type="button" onClick={()=>setOpen(false)} className={`${isPending?'hidden':'block'} hover:bg-red-600 bg-red-700 px-4 py-2 rounded-full font-bold text-slate-200 text-xl w-full mt-3`}>Cancel</button>
         </form>
     )
 }

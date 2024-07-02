@@ -16,7 +16,7 @@ export function Nav({session}) {
         setPath(pathname)
     }, [pathname])
     return (
-        <nav className="bottom-0 w-screen md:w-fit z-20 bg-slate-900 group/nav md:h-screen fixed md:static justify-around md:justify-start items-center py-2 md:py-4 md:px-8 flex md:flex-col overflow-x-hidden text-4xl font-bold">
+        <nav className="bottom-0 w-screen md:w-fit z-50 bg-slate-900 group/nav md:h-screen fixed md:static justify-around md:justify-start items-center py-2 md:py-4 md:px-8 flex md:flex-col overflow-x-hidden text-4xl font-bold">
             <Link className="hidden md:inline text-red-200 text-xl mb-6 my-4" href="/">
                 SEA Salon
             </Link>

@@ -36,7 +36,7 @@ export function Profile({data}) {
         return (
             <>
                 <h2 className="text-4xl mb-6 font-bold">Profile</h2>
-                <div className="flex bg-slate-900 text-red-200 gap-8 items-center flex-wrap px-6 md:px-10 py-6">
+                <div className="flex bg-slate-900 text-red-200 gap-8 items-center mb-[8rem] md:mb-0 flex-wrap px-6 md:px-10 py-6">
                     <div className="w-[20rem]">
                         <Image
                             src={'/dashboard/profile-default.svg'}
@@ -47,7 +47,7 @@ export function Profile({data}) {
                             className={`rounded-full m-auto`}
                         />
                     </div>
-                    <div className="border-red-200 border-t-2 md:border-t-0 md:pl-4 md:border-l-2 md:text-lg truncate">
+                    <div className="border-red-200 w-full md:w-fit border-t-2 md:border-t-0 md:pl-4 md:border-l-2 md:text-lg truncate">
                         <h3 className="my-2"><b>Name : </b>{profile?.name}</h3>
                         <h3 className="my-2"><b>Email : </b>{profile?.email}</h3>
                         <h3 className="my-2"><b>Phone Number : </b>{profile?.tel}</h3>

@@ -2,8 +2,9 @@
 import { useState } from "react";
 import { Submit } from "../sign/button";
 import { Select, SelectItem } from "@nextui-org/react";
+import { HiOfficeBuilding } from "react-icons/hi"
+import { FaLocationDot } from "react-icons/fa6";
 export function Form({branchs}) {
-    console.log(branchs)
     const [service,setService] = useState()
     const [info, setInfo] = useState('')
     const [isPending, setPending] = useState(false)
@@ -42,16 +43,23 @@ export function Form({branchs}) {
             placeholder="Select Branch"
             isRequired
             label="Branch"
-            className="w-full block"
+            className="w-full block border-2 border-slate-900 rounded-full"
             aria-label="Type of Service"
             radius="full"
             labelPlacement="outside"
-            name="branch" 
+            name="branch"
+            startContent={<HiOfficeBuilding/>} 
             onChange={handleChange}
             >
             {branchs?.map((list) => (
-                <SelectItem key={list.branch} value={list.branch}>
-                {list.branch}
+                <SelectItem key={list.branch} textValue={list.branch}>
+                    <div className="flex flex-col gap-1">
+                        <span className="text-small">{list.branch}</span>
+                        <div className="flex gap-1">
+                            <FaLocationDot/>
+                            <span className="text-tiny text-default-400">{list.location}</span>
+                        </div>
+                    </div>
                 </SelectItem>
             ))}
             </Select>

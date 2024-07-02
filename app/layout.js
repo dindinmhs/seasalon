@@ -14,10 +14,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <Head>
-        <link rel="icon" href="/head/favicon.ico"/>
-      </Head>
-      <body className={poppins.className}>
+      <body className={`${poppins.className} overflow-auto`}>
         <Providers>
           <NextUIProvider>
             {children}

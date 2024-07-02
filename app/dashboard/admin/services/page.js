@@ -1,10 +1,8 @@
 "use client"
 import { Form } from "@/components/admin/services-form"
-import { useSession } from "next-auth/react"
 import { Loading } from "@/components/loading/loading"
 import { useState, useEffect } from "react"
 export default function Services() {
-    const {data, status} = useSession()
     const [branchs,setBranchs] = useState()
     const [isPending, setPending] = useState(false)
     async function fetchBranchs() {
@@ -25,13 +23,13 @@ export default function Services() {
     useEffect(()=>{
         fetchBranchs()
     },[])
-    if (status === 'loading' || isPending) {
+    if (isPending) {
         return (
             <Loading/>
         )
-    } else if (status === 'authenticated' || !isPending) {
+    } else {
         return (
-            <Form data={data} branchs={branchs}/>
+            <Form branchs={branchs}/>
         )
     }
 }
