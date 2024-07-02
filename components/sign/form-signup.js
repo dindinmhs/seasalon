@@ -42,6 +42,7 @@ export function Form() {
                 })
                 if (res.ok) {
                     router.push('/sign-in')
+                    setPending(false)
                 } else {
                     setInfo('failed to sign up')
                 }

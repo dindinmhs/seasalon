@@ -37,6 +37,7 @@ export function Form() {
                 })
                 if (res.ok) {
                     router.replace('/dashboard/customer/booking')
+                    setPending(false)
                 } else {
                     setInfo('failed to sign in')
                 }

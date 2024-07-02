@@ -3,6 +3,9 @@ import { Loading } from "../loading/loading"
 import { MdDateRange } from "react-icons/md"
 import { IoMdTime } from "react-icons/io"
 import { NoHistory } from "./nohistory"
+import { FaLocationDot } from "react-icons/fa6"
+import { HiOfficeBuilding } from "react-icons/hi"
+import { IoPerson } from "react-icons/io5"
 export function DashboardHistories({data}) {
     const [histories,setHistories] = useState()
     const [isPending, setPending] = useState(false)
@@ -37,18 +40,29 @@ export function DashboardHistories({data}) {
     } else {
         return (
             <>
-                <h2 className="text-2xl mb-6 font-bold">Histories</h2>
+                <h2 className="text-4xl mb-6 font-bold">Histories</h2>
                 <div className="flex flex-wrap font-bold gap-6 mb-[6rem] md:mb-0">
                 {histories?.length === 0?(<NoHistory/>):
                     histories?.map(list=>(
                         <div key={list._id} className="w-[30rem] bg-slate-900 text-red-200 p-6">
-                            <h3 className="text-lg mb-2">{list.name}</h3>
-                            <div className="flex items-center gap-4 my-1">
-                                <MdDateRange size={30} className=""/>
+                            <div className="flex items-center gap-4 my-2 border-red-200 border-b-2 pb-2">
+                                <HiOfficeBuilding size={30} className=""/>
+                                <h3 className="text-xl truncate">{list.branch}</h3>
+                            </div>
+                            <div className="flex items-center mt-4 mb-2 gap-4">
+                                <FaLocationDot size={22} className=""/>
+                                <p className="truncate">{list.location}</p>
+                            </div>
+                            <div className="flex items-center gap-4 my-2">
+                                <IoPerson size={22} className=""/>
+                                <p className="truncate">{list.name}</p>
+                            </div>
+                            <div className="flex items-center gap-4 my-2">
+                                <MdDateRange size={22} className=""/>
                                 <p>{list.date}</p>
                             </div>
-                            <div className="flex items-center gap-4 my-1">
-                                <IoMdTime size={30} className=""/>
+                            <div className="flex items-center gap-4 my-2">
+                                <IoMdTime size={22} className=""/>
                                 <p>{list.time}</p>
                             </div>
                             <div className="flex justify-end gap-2 mt-2">

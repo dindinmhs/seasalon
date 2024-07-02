@@ -8,6 +8,8 @@ export function Form({data, branchs}) {
     const [info, setInfo] = useState('')
     const [services,setServices] = useState()
     const [isPending, setPending] = useState(false)
+    const [loadService,setLoadService] = useState(false)
+    const [selectBranch, setSelectBranch] = useState()
     useEffect(() => {
         const now = new Date();
         const yyyy = now.getFullYear();
@@ -24,7 +26,7 @@ export function Form({data, branchs}) {
         setBook(values => ({...values, [name] : value, email_id : data.user.email}))
     }
     useEffect(()=>{
-        let list = !services?"":services.filter(list=>list.service.includes(book?.type))
+        const list = !services?"":services.filter(list=>list.service.includes(book?.type))
         setBook(values => ({...values, duration : list[0]?.duration}))
     }, [book?.type])
     async function handleSubmit(e) {
@@ -51,7 +53,11 @@ export function Form({data, branchs}) {
         }
     }
     async function fetchServices(event) {
+        const filter = branchs.filter(list=>list.branch.includes(event.target.value))
+        setBook(values => ({...values, location : filter[0]?.location}))
+        setSelectBranch(filter[0])
         try {
+            setLoadService(true)
             const res = await fetch('/api/get-services', {
                 method : 'POST',
                 headers : {
@@ -67,11 +73,10 @@ export function Form({data, branchs}) {
             setBook(values => ({...values, branch:event.target.value}))
         } catch (error) {
             console.error('Form submission error:', error)
+        } finally {
+            setLoadService(false)
         }
     }
-    useEffect(()=>{
-        console.log(book)
-    },[book])
     return (     
         <form onSubmit={handleSubmit} className="md:w-[20rem] w-full font-bold mb-[6rem] md:mb-0 mx-auto md:m-0">
             <h2 className="text-2xl mb-6">Reservation Form</h2>
@@ -84,7 +89,7 @@ export function Form({data, branchs}) {
             placeholder="Select Branch"
             isRequired
             label="Branch"
-            className="w-full block mb-10"
+            className={`${loadService?'mb-4':'mb-10'} w-full block`}
             aria-label="Branch"
             radius="full"
             labelPlacement="outside"
@@ -97,36 +102,40 @@ export function Form({data, branchs}) {
                 </SelectItem>
             ))}
             </Select>
-            <Select 
-            placeholder={!services?"Select Branch First":"Type of Service"}
-            isRequired
-            label="Type of Service"
-            className="w-full block"
-            aria-label="Type of Service"
-            radius="full"
-            labelPlacement="outside"
-            name="type" 
-            onChange={handleChange}
-            >
-            {!services?"":services.map((list) => (
-                <SelectItem key={list.service} value={list.service}>
-                {list.service}
-                </SelectItem>
-            ))}
-            </Select>
-            <label htmlFor="date" className="mt-2 block">Reservation Date</label>
-            <input required onChange={handleChange} name="date" id="date" type="date" min={today} aria-label="Reservation Date" className="border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block  mt-1 font-bold w-full"/>
-            <label htmlFor="time" className="mt-2 block">Reservation Time</label>
-            <input required onChange={handleChange} name="time" id="time" type="time" min="09:00" max="20:00" aria-label="Reservation Time" className="border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block  mt-1 font-bold w-full"/>
-            <div className="mt-1">
-                <small className="ml-4 block">from 09:00 - 20:00</small>
-            </div>
+            {loadService?(
+                <div className={`block loader animate-spin bg-slate-900 w-10 m-auto`}></div>
+            ):(
+                <Select 
+                placeholder={!services?"Please select a branch first.":services?.length === 0?"There are currently no services":"Type of Service"}
+                isRequired
+                label="Type of Service"
+                className="w-full block"
+                aria-label="Type of Service"
+                radius="full"
+                labelPlacement="outside"
+                name="type" 
+                onChange={handleChange}
+                >
+                {!services?null:services.map((list) => (
+                    <SelectItem key={list.service} value={list.service}>
+                    {list.service}
+                    </SelectItem>
+                ))}
+                </Select>
+            )}
             <label htmlFor="time" className="mt-2 block">Duration</label>
             <div className="px-4 border-solid border-black rounded-full py-1 border-2 text-lg font-bold w-full bg-gray-100 flex justify-between">
                 <p>{book?.duration?`${book.duration} hour`:"-"}</p>
             </div>
-            <p className="text-sm mb-4 font-bold">{info}</p>
-            <Submit name="Book Now" isPending={isPending}/>
+            <label htmlFor="date" className="mt-2 block">Reservation Date</label>
+            <input required onChange={handleChange} name="date" id="date" type="date" min={today} aria-label="Reservation Date" className="border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block  mt-1 font-bold w-full"/>
+            <label htmlFor="time" className="mt-2 block">Reservation Time</label>
+            <input required onChange={handleChange} name="time" id="time" type="time" min={selectBranch?.open} max={selectBranch?.close} aria-label="Reservation Time" className="border-2 text-lg py-1 px-4 border-solid border-black rounded-full placeholder-slate-900 outline-none block  mt-1 font-bold w-full"/>
+            <div className="mt-1">
+                <small className="ml-4 block">{selectBranch?`open from ${selectBranch.open} - ${selectBranch.close}`:'-'}</small>
+            </div>
+            <p className="text-sm mb-4 font-bold mt-2">{info}</p>
+            <Submit name="Book Now" disable={loadService} isPending={isPending}/>
             <div className={`${isPending?'block':'hidden'} loader animate-spin bg-slate-900 w-12 m-auto`}></div>
         </form>
     )
