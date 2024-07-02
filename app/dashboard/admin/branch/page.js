@@ -30,7 +30,7 @@ export default function Branch() {
             <ShowBranch setOpen={setOpen} isPending={isPending} branchs={branchs}/>
             <div className={`${isOpen?'block':'hidden'} fixed top-0 right-0 left-0 bottom-0 flex justify-center items-center bg-[rgba(0,0,0,0.5)]`}>
                 <div className="w-full md:w-[50rem] h-[100vh] lc:h-fit overflow-auto py-8 px-4 bg-slate-200 flex justify-center">
-                    <Form setOpen={setOpen}/>
+                    <Form fetchBranchs={fetchBranchs} setOpen={setOpen}/>
                 </div>
             </div>
         </>

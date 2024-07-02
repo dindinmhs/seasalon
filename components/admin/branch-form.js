@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react";
 import { Submit } from "../sign/button";
-export function Form({setOpen}) {
+export function Form({setOpen, fetchBranchs}) {
     const [branch,setBranch] = useState()
     const [info, setInfo] = useState('')
     const [isPending, setPending] = useState(false)
@@ -38,6 +38,7 @@ export function Form({setOpen}) {
                  if (!res.ok) {
                      throw new Error(`HTTP error! status: ${res.status}`);
                  }
+                 fetchBranchs()
                  setInfo("Branch has been added!")
                  e.target.reset()
              }
@@ -45,6 +46,7 @@ export function Form({setOpen}) {
                 console.error('Form submission error:', error)
             } finally {
                 setPending(false)
+                setOpen(false)
             }
     }
     return (     
