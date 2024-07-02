@@ -9,7 +9,7 @@ export function Home() {
                 <div className="text-xl pb-20 md:pb-0 md:text-4xl">
                     <h1 className="text-5xl md:text-7xl text-red-400 font-serif">SEA Salon</h1>
                     <h2 className="mt-4 mb-8">Beauty and Elegance Redefined</h2>
-                    <Link className="px-6 text-black font-bold py-2 bg-red-400 hover:bg-red-500 rounded-full" href="/reserve">Book Now</Link>
+                    <Link className="px-6 text-black font-bold py-2 bg-red-400 hover:bg-red-500 rounded-full" href="/sign-in">Book Now</Link>
                 </div>
             </div>
             <div className="order-2 h-[36rem] md:h-[40rem] flex px-10 pt-20 py-10">

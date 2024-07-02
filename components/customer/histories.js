@@ -44,7 +44,7 @@ export function DashboardHistories({data}) {
                 <div className="flex flex-wrap font-bold gap-6 mb-[6rem] md:mb-0">
                 {histories?.length === 0?(<NoHistory/>):
                     histories?.map(list=>(
-                        <div key={list._id} className="w-[30rem] bg-slate-900 text-red-200 p-6">
+                        <div key={list._id} className="w-full md:w-[30rem] bg-slate-900 text-red-200 p-6">
                             <div className="flex items-center gap-4 my-2 border-red-200 border-b-2 pb-2">
                                 <HiOfficeBuilding size={30} className=""/>
                                 <h3 className="text-xl truncate">{list.branch}</h3>
@@ -67,7 +67,7 @@ export function DashboardHistories({data}) {
                             </div>
                             <div className="flex justify-end gap-2 mt-2">
                                 <p className="bg-red-200 text-slate-900 w-fit px-4 py-1 rounded-full truncate">{list.type}</p>
-                                <p className="bg-red-200 text-slate-900 w-fit px-4 py-1 rounded-full">{`${list.duration} hour`}</p>
+                                <p className="bg-red-200 text-slate-900 w-fit px-4 py-1 rounded-full truncate">{`${list.duration} hour`}</p>
                             </div>
                         </div>
                 ))}
